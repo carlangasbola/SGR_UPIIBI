@@ -9,7 +9,6 @@ import javax.inject.Named;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Named("Usuarios")
@@ -26,7 +25,7 @@ public class ManagedBeanUsuarios {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transObj = session.beginTransaction();
-            session.delete((Usuarios) session.get(Usuarios.class, Integer.valueOf(idUsuario)));
+            session.delete((Usuarios) session.get(Usuarios.class, idUsuario));
 
             transObj.commit();
             mensaje.setMessage("Eliminado del sistema");
