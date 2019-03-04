@@ -1,0 +1,105 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:body>
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+                <h:form>  
+                    <p:growl id="growl" showDetail="true" sticky="false"  />  
+                </h:form>
+
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <h4 class=" text-center">Módulo de administración de Grupos</h4>
+                        <p class="lead">Bienvenido al módulo de creación de grupos, da clic en crear y completa los
+                            datos que se te piden.</p>
+                        <p >Una vez creado el grupo, da clic en su nombre para añadir o visuzalizar
+                            las unidades de aprendizaje que tiene asignadas.</p>
+                    </div>
+                </div>
+
+                <div class="row text-center">
+                    <div class="col">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" >
+                            <i class="fas fa-plus"></i>
+                            Crear un nuevo grupo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col">
+                        <table class="table">
+                            <thead class="thead-dark ">
+                                <tr>
+                                    <th scope="col">Grupo</th>
+                                    <th scope="col">Unidades Aprendizaje</th>
+                                    <th scope="col">Lugares disponibles</th>
+                                    <th scope="col">Modificar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+
+                            <h:form>
+                                <ui:repeat var="g"  value="#{Grupo.obtenerGrupos()}"  >
+                                    <tr>
+                                        <td> 
+                                            <h:commandLink  value="#{g.nombre}" /> 
+                                        </td>
+                                        <td> <h:outputText value="#{Grupo.cantidadUnidadesAprendizaje(g.idGrupo)}" /> </td>
+                                        <td>aaa</td>
+                                        <td>
+                                            <h:commandButton styleClass="btn btn-link" value="Modificar Grupo"></h:commandButton>
+                                        </td>
+                                        <td>
+                                            <a jsf:action="#{Grupo.eliminarGrupo(g.idGrupo)}"> Eliminar grupo </a>                        
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                            </h:form>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Modal de creacion de grupo -->
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Creación de grupo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h:form>
+                                    <p class="text-danger lead">El nombre del grupo no se puede repetir</p>
+                                    <label for="nombre">Nombre del grupo</label>
+                                    <input id="nombre" class="form-control" type="text" jsf:value="#{Grupo.grupo.nombre}" />
+                                    <label for="cupo">Cupo del grupo</label>
+                                    <input id="cupo" class="form-control" type="number" min="15" max="40" jsf:value="#{Grupo.grupo.cupo}"/>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary" jsf:action="#{Grupo.insertarGrupo()}">Crear grupo</button>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ui:define> 			
+        </ui:composition> 
+    </h:body>
+</html>

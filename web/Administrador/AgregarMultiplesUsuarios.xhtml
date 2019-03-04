@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+                <h1 class="h2">Agregar múltiples usuarios al sistema </h1>
+                <p> 
+                    <div class="alert alert-info">
+                        <strong>Nota</strong>: Solamente se pueden agregar alumnos.
+                    </div> 
+                </p>
+                <p> <strong>Instrucciones</strong> </p>
+                <p> 1.- Descargue nuestra plantilla <a href="../FormatoExcel/FormatoExcel.xls">Click para descargar</a>.  </p>
+                <p> 2.- Llene los datos que se presentan en el archivo que acaba de descargar.</p>
+                <p> 3.- A continuación haga click en buscar archivo, seleccione la plantilla con lainformación que ya ha ingresado y haga click en subir</p>
+                <p> 4.- Dar clic en el boton "Agregar Alumnos".</p>
+
+                <div class="w-100"></div>
+                Seleccionar archivo:
+                <p:fileUpload mode="advanced" 
+                              dragDropSupport="false"
+                              sizeLimit="1000000" fileLimit="10" 
+                              allowTypes="/(\.|\/)(xls)$/"  
+                              fileLimitMessage="El maximo de imagenes es 1"  
+                              invalidFileMessage="Se debe seleccionar un archivo xls"
+                              cancelLabel="Cancelar" uploadLabel="Subir Archivo" label="Buscar Archivo"/>
+
+            </ui:define> 			
+        </ui:composition> 
+    </h:body>
+</html>

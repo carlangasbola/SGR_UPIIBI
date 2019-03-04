@@ -1,0 +1,74 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+
+                <h5>Selecciona las unidades de aprendizaje y el docente que las impartirá a continuación</h5>
+
+                <div class="row">
+                    <div class="col">
+                        <p><strong>Grupo:</strong> NOMBREGRUPO <br/>
+                            <strong>Cantidad de Alumnos:</strong> 99</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal">
+                            <i class="fas fa-plus"></i> Añadir Unidad de aprendizaje
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Selecciona el docente y la unidad</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <h:form id="form">
+                                    <div class="form-group">
+                                        <label for="docente"> <strong>Docente</strong> </label>
+                                        <h:selectOneMenu id="docente" class="form-control" value = "#{UnidadGrupo.docente}"> 
+                                            <f:selectItems value="#{DatosUsuario.obtenerDatosUsuarioRol(2)}" var="du" itemValue = "#{du.idUsuarios}" itemLabel = "#{du.nombre} #{du.apellidoPaterno} #{du.apellidoPaterno}" /> 
+                                        </h:selectOneMenu> 
+                                         <small id="emailHelp" class="form-text text-muted">Orden: Nombre, Apellido Paterno, Apellido Materno</small>
+                                    </div>
+                                    <div class="form-group">
+                                        
+                                        <label for="unidadAprendizaje"> <strong>Unidad de aprendizaje</strong> </label>
+                                        <h:selectOneMenu id="unidadAprendizaje" class="form-control" value = "#{UnidadAprendizaje.unidadAprendizajeSeleccionada}"> 
+                                            <f:selectItems value="#{UnidadAprendizaje.obtenerUnidadesAprendizaje()}" var="ua" itemValue = "#{ua.idUnidadAprendizaje}" itemLabel = "#{ua.nombre}" /> 
+                                        </h:selectOneMenu> 
+                                        <small id="emailHelp" class="form-text text-muted">Nombre de la unidad de aprendizaje</small>
+                                    </div>
+                                </h:form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ui:define> 			
+        </ui:composition> 
+    </h:body>
+</html>
