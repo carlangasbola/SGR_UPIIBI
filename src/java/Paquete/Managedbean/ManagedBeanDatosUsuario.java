@@ -112,7 +112,7 @@ public class ManagedBeanDatosUsuario {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<DatosUsuario> datosUsuarios = new ArrayList();
         Query query = session.createQuery("FROM DatosUsuario WHERE usuarios.roles.idRol = :idRol");
-        query.setParameter("idRol", Integer.valueOf(idRol));
+        query.setParameter("idRol", idRol);
         datosUsuarios = query.list();
         return datosUsuarios;
     }

@@ -56,7 +56,7 @@ public class ManagedBeanGrupo {
     public Long cantidadUnidadesAprendizaje(int idGrupo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query q = session.createQuery("SELECT COUNT(*) FROM UnidadGrupo WHERE grupo.idGrupo = :idGrupo");
-        q.setParameter("idGrupo", Integer.valueOf(idGrupo));
+        q.setParameter("idGrupo", idGrupo);
         Long count = (Long) q.uniqueResult();
         session.close();
         return count;

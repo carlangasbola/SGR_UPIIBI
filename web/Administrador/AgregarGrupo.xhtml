@@ -54,7 +54,9 @@
                                 <ui:repeat var="g"  value="#{Grupo.obtenerGrupos()}"  >
                                     <tr>
                                         <td> 
-                                            <h:commandLink  value="#{g.nombre}" /> 
+                                            <h:commandLink  value="#{g.nombre}" action="RelacionarUnidadAprendizajeGrupo" >
+                                                <f:param name="grupo" value="#{g}"></f:param>
+                                            </h:commandLink> 
                                         </td>
                                         <td> <h:outputText value="#{Grupo.cantidadUnidadesAprendizaje(g.idGrupo)}" /> </td>
                                         <td>aaa</td>

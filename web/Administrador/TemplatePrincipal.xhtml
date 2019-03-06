@@ -24,10 +24,10 @@
     </h:head>
 
     <h:body id="page-top"> 
-        
+
         <!-- Growl para la muestra de mensajes -->
         <p:growl id="growl" showDetail="true" sticky="true" />  
-        
+
         <div id="wrapper">
             <!-- Sidebar -->
             <ui:insert name = "barralateral" >
@@ -86,6 +86,11 @@
         </div>
 
 
+        <h:form>
+            <h:commandButton action="unidadgrupo" value="Go" ></h:commandButton>
+        </h:form>
+
+
         <!-- Bootstrap core JavaScript-->
         <script src="../Files/vendor/jquery/jquery.min.js"></script> 
         <script src="../Files/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -102,8 +107,8 @@
         <!-- Page level custom scripts -->
         <script src="../Files/js/demo/chart-area-demo.js"></script>
         <script src="../Files/js/demo/chart-pie-demo.js"></script>
-        
-        
+
+
         <!-- Page level plugins -->
         <script src="../Files/vendor/datatables/jquery.dataTables.min.js"></script>
         <script src="../Files/vendor/datatables/dataTables.bootstrap4.min.js"></script>

@@ -5,7 +5,7 @@
       xmlns:ui = "http://java.sun.com/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+     >
 
     <h:body>
 
@@ -28,45 +28,60 @@
                         </button>
                     </div>
                 </div>
+                
+                
+                <ui:repeat value="#{UnidadGrupo.obtenerUnidadesAprendizaje()}" var="ug" >
+                    <p> #{ug.grupo.nombre} -- #{ug.unidadAprendizaje.nombre} -- #{ug.usuarios.datosUsuario.nombre} </p>
+                </ui:repeat>
 
                 <!-- Modal -->
-                <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Selecciona el docente y la unidad</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true"></span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
+                <h:form>
+                    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Selecciona el docente y la unidad</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    
+                                    <div class="form-group">
+                                        <label for="grupo"> <strong>Grupo</strong> </label>
+                                        <h:selectOneMenu id="grupo" class="form-control" value = "#{UnidadGrupo.grupo.idGrupo}"> 
+                                            <f:selectItems value="#{Grupo.obtenerGrupos()}" var="g" itemValue = "#{g.idGrupo}" itemLabel = "#{g.nombre}" /> 
+                                        </h:selectOneMenu> 
+                                        <small id="emailHelp" class="form-text text-muted">Orden: Nombre, Apellido Paterno, Apellido Materno</small>
+                                    </div>
 
-                                <h:form id="form">
                                     <div class="form-group">
                                         <label for="docente"> <strong>Docente</strong> </label>
-                                        <h:selectOneMenu id="docente" class="form-control" value = "#{UnidadGrupo.docente}"> 
-                                            <f:selectItems value="#{DatosUsuario.obtenerDatosUsuarioRol(2)}" var="du" itemValue = "#{du.idUsuarios}" itemLabel = "#{du.nombre} #{du.apellidoPaterno} #{du.apellidoPaterno}" /> 
+                                        <h:selectOneMenu id="docente" class="form-control" value = "#{UnidadGrupo.docente.idUsuarios}"> 
+                                            <f:selectItems value="#{DatosUsuario.obtenerDatosUsuarioRol(2)}" var="du" itemValue = "#{du.usuarios.idUsuarios}" itemLabel = "#{du.nombre} #{du.apellidoPaterno} #{du.apellidoPaterno}" /> 
                                         </h:selectOneMenu> 
-                                         <small id="emailHelp" class="form-text text-muted">Orden: Nombre, Apellido Paterno, Apellido Materno</small>
+                                        <small id="emailHelp" class="form-text text-muted">Orden: Nombre, Apellido Paterno, Apellido Materno</small>
                                     </div>
                                     <div class="form-group">
-                                        
+
                                         <label for="unidadAprendizaje"> <strong>Unidad de aprendizaje</strong> </label>
-                                        <h:selectOneMenu id="unidadAprendizaje" class="form-control" value = "#{UnidadAprendizaje.unidadAprendizajeSeleccionada}"> 
+                                        <h:selectOneMenu id="unidadAprendizaje" class="form-control" value = "#{UnidadGrupo.unidadAprendizaje.idUnidadAprendizaje}"> 
                                             <f:selectItems value="#{UnidadAprendizaje.obtenerUnidadesAprendizaje()}" var="ua" itemValue = "#{ua.idUnidadAprendizaje}" itemLabel = "#{ua.nombre}" /> 
                                         </h:selectOneMenu> 
                                         <small id="emailHelp" class="form-text text-muted">Nombre de la unidad de aprendizaje</small>
                                     </div>
-                                </h:form>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Guardar</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                                    <h:commandButton class="btn btn-primary" value="Guardar" action="#{UnidadGrupo.insertUnidadGrupo()}" ></h:commandButton>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </h:form>
 
             </ui:define> 			
         </ui:composition> 
