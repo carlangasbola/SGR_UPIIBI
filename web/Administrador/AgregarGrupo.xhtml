@@ -44,7 +44,6 @@
                                 <tr>
                                     <th scope="col">Grupo</th>
                                     <th scope="col">Unidades Aprendizaje</th>
-                                    <th scope="col">Lugares disponibles</th>
                                     <th scope="col">Modificar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
@@ -54,12 +53,12 @@
                                 <ui:repeat var="g"  value="#{Grupo.obtenerGrupos()}"  >
                                     <tr>
                                         <td> 
-                                            <h:commandLink  value="#{g.nombre}" action="RelacionarUnidadAprendizajeGrupo" >
-                                                <f:param name="grupo" value="#{g}"></f:param>
+                                            <h:commandLink  value="#{g.nombre}" action="#{UnidadGrupo.redirect()}" >
+                                                <f:setPropertyActionListener target="#{UnidadGrupo.grupo}" value="#{g}"></f:setPropertyActionListener>
                                             </h:commandLink> 
                                         </td>
                                         <td> <h:outputText value="#{Grupo.cantidadUnidadesAprendizaje(g.idGrupo)}" /> </td>
-                                        <td>aaa</td>
+                                     
                                         <td>
                                             <h:commandButton styleClass="btn btn-link" value="Modificar Grupo"></h:commandButton>
                                         </td>

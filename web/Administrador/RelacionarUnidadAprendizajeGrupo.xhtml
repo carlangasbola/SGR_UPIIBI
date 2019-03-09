@@ -3,10 +3,8 @@
 <html xmlns = "http://www.w3.org/1999/xhtml"   
       xmlns:h = "http://java.sun.com/jsf/html"
       xmlns:ui = "http://java.sun.com/jsf/facelets"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-     >
-
+      >
     <h:body>
 
         <ui:composition template = "TemplatePrincipal.xhtml">	         
@@ -16,8 +14,8 @@
 
                 <div class="row">
                     <div class="col">
-                        <p><strong>Grupo:</strong> NOMBREGRUPO <br/>
-                            <strong>Cantidad de Alumnos:</strong> 99</p>
+                        <p><strong>Grupo: &nbsp;</strong>  <h:outputText value="#{UnidadGrupo.grupo.nombre}"></h:outputText> <br/>
+                            <strong>Cantidad de Alumnos:</strong>  <h:outputText value="">#{UnidadGrupo.grupo.cupo}</h:outputText> </p>
                     </div>
                 </div>
 
@@ -28,11 +26,43 @@
                         </button>
                     </div>
                 </div>
-                
-                
-                <ui:repeat value="#{UnidadGrupo.obtenerUnidadesAprendizaje()}" var="ug" >
-                    <p> #{ug.grupo.nombre} -- #{ug.unidadAprendizaje.nombre} -- #{ug.usuarios.datosUsuario.nombre} </p>
-                </ui:repeat>
+
+                <br />
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Unidad de aprendizaje</th>
+                            <th scope="col">Profesor que Imparte</th>
+                            <th scope="col"> # Alumnos</th>
+                            <th scope="col">Agregar Alumnos</th>
+                            <th scope="col">Eliminar</th>
+                            <th scope="col">Actualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <h:outputText  style="font-weight:bold" value="La tabla no contiene ninguna unidad de aprendizaje." rendered="#{empty UnidadGrupo.obtenerUnidadesAprendizajeGrupo()}" />
+                        <h:form>
+                            <ui:repeat value="#{UnidadGrupo.obtenerUnidadesAprendizajeGrupo()}" var="ug" >
+                                <tr>
+                                    <th>#{ug.unidadAprendizaje.nombre}</th>
+                                    <th>
+                                        #{ug.usuarios.datosUsuario.nombre}
+                                        #{ug.usuarios.datosUsuario.apellidoPaterno}
+                                        #{ug.usuarios.datosUsuario.apellidoMaterno}
+                                    </th>
+                                    <th> 99 </th>
+                                    <th> 
+                                        <h:commandLink styleClass="btn btn-primary btn-sm ">
+                                            <i class="fas fa-user-plus"></i> Agregar Alumno
+                                        </h:commandLink>
+                                    </th>
+                                    <th> -- </th>
+                                    <th> -- </th>
+                                </tr>
+                            </ui:repeat>
+                        </h:form>
+                    </tbody>
+                </table>
 
                 <!-- Modal -->
                 <h:form>
@@ -46,14 +76,6 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    
-                                    <div class="form-group">
-                                        <label for="grupo"> <strong>Grupo</strong> </label>
-                                        <h:selectOneMenu id="grupo" class="form-control" value = "#{UnidadGrupo.grupo.idGrupo}"> 
-                                            <f:selectItems value="#{Grupo.obtenerGrupos()}" var="g" itemValue = "#{g.idGrupo}" itemLabel = "#{g.nombre}" /> 
-                                        </h:selectOneMenu> 
-                                        <small id="emailHelp" class="form-text text-muted">Orden: Nombre, Apellido Paterno, Apellido Materno</small>
-                                    </div>
 
                                     <div class="form-group">
                                         <label for="docente"> <strong>Docente</strong> </label>
