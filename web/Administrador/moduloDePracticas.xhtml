@@ -1,0 +1,59 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:body>
+        <!-- Aquí va el contenido solo van ROWS y COLS no colocar containers -->
+        <ui:composition template = "common.xhtml">		
+            <ui:define name = "content">
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="inicioAdministrador.xhtml">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active">Módulo de prácticas</li>
+                </ol>
+                <div class="row text-center mt-2">
+                    <div class="col">
+                        <h4 class="colorpantone text-center">Bienvenido al módulo de creación de practicas</h4>
+                        <p class="lead">Estas son las practicas que han sido creadas o en su caso puedes crear una dando clic a continuación</p>
+                        <h:form>
+                            <button type="button" class=" btn  my-3" jsf:outcome="creacionPractica1" >Crear una nueva práctica</button>
+                        </h:form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Datos</th>
+                                    <th scope="col">Título de la práctica</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Nivel de riesgo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <h:form>
+                                    <ui:repeat var="p" value="#{managedBeanAdminPracticas.getPracticas()}" >
+                                        <tr>
+                                            <td><a jsf:action="#{managedBeanAdminPracticas.asigna(p.idPractica)}">Ver</a></td>
+                                            <td>#{p.datosPractica.editor}</td>
+                                            <td>#{p.creacion}</td>
+                                            <td>#{p.datosPractica.semaforo}</td>
+                                        </tr>
+                                    </ui:repeat>
+                                </h:form>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Si vas a usar Jquery dejalo debajo de aqui si no borralo (Cuando usas primefaces) -->
+                <script src="../vendor/jquery/jquery.min.js"></script> 
+            </ui:define> 
+        </ui:composition>       
+    </h:body>
+</html>

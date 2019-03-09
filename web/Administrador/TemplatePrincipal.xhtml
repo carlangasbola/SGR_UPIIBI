@@ -59,6 +59,11 @@
                 </div>
             </div>  
         </div>
+        
+        <ui:repeat value="#{Practica.obtenerPracticas()}" var="p">
+            <p> #{p.creacion} </p>
+            <p> #{p.datosPractica.nombre} </p>
+        </ui:repeat>
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
@@ -86,10 +91,7 @@
         </div>
 
 
-        <h:form>
-            <h:commandButton action="unidadgrupo" value="Go" ></h:commandButton>
-        </h:form>
-
+      
         <!-- RECUERDA MOVI ESTOS ARCHIVOS  -->
         <!-- Bootstrap core JavaScript-->
         <!-- <script src="../Files/vendor/jquery/jquery.min.js"></script> --> 

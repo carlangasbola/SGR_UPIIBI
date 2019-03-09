@@ -45,7 +45,7 @@ public class ManagedBeanGrupo {
             tx.rollback();
             mensaje.setMessage("No se pudo completar la transacción");
             mensaje.fatal();
-            throw e;
+          
         } finally {
             if (session != null) {
                 session.close();
@@ -85,7 +85,7 @@ public class ManagedBeanGrupo {
             tx.rollback();
             mensaje.setMessage("No se puedo insertar el usuario, consulte el log para mas detalles");
             mensaje.fatal();
-            throw e;
+            
         } finally {
             if (session != null) {
                 session.close();

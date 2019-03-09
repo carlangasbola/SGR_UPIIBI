@@ -1,0 +1,133 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+
+        <!-- Aquí va el contenido solo van ROWS y COLS no colocar containers -->
+       <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+                
+
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col">
+                            <h3> Ventana de confirmación de datos </h3>
+                            <p class="text-secondary"> Estos son los datos que se mostrarán en el pdf </p>
+                            <p class="text-secondary">Si está de acuerdo con los datos oprima el botón de <strong>guardar práctica.</strong></p>
+                        </div>
+                    </div>
+
+                    <h:form>
+
+                        <p:commandButton class="anteriorsiguiente successansig form-control mt-2 col-sm-2" id="LinkDescarga" value="Descargar" ajax="false" actionListener="#{managedBeanPractica.preparaDescarga(managedBeanPractica.direccion)}">
+                            <p:fileDownload value="#{managedBeanPractica.descarga}" />
+                        </p:commandButton>
+
+                        <button type="submit" class="anteriorsiguiente successansig form-control mt-2 col-sm-2" jsf:action="#{managedBeanAdminPracticas.crearPractica()}" style="float:left">Guardar</button>
+
+
+                        <h:selectOneMenu id="uni" value="#{managedBeanAdminPracticas.idUnidadTematica}" styleClass="form-control" >
+                            <!-- Le mando el 2 por que indica los docentes -->
+                            <f:selectItems value="#{managedBeanAdminPracticas.unidadesT}" var="u" itemValue="#{u.idUnidadTematica}" itemLabel="#{u.nombre}" />
+                        </h:selectOneMenu>
+
+                    </h:form>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="card" >
+                                <div class="card-header colortitulo text-white">
+                                    I Requisitos
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><strong>Número de práctica:</strong><br/>#{managedBeanPractica.practica.numeropractica}</li>
+                                    <li class="list-group-item"><strong>Título de la práctica:</strong><br/>#{managedBeanPractica.practica.titulopractica}</li>
+                                    <li class="list-group-item"><strong>Objetivos:</strong><br/>#{managedBeanPractica.practica.objetivos}</li>
+                                    <li class="list-group-item"><strong>Actividades previas:</strong><br/>#{managedBeanPractica.practica.actividadesprevias}</li>           
+                                    <li class="list-group-item"><strong>Introducción:</strong><h:outputText value="#{managedBeanPractica.practica.introduccion}" escape="false" ></h:outputText> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="card" >
+                                <div class="card-header colortitulo text-white">
+                                    II Materiales y Equipo
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><strong>Reactivos:</strong>
+                                        <ui:repeat var="item" value="#{managedBeanReactivos.lista}" >
+                                            <br />
+                                            Cantidad:   #{item.cantidad}   Nombre:   #{item.nombre}
+                                        </ui:repeat>
+                                    </li>
+                                    <li class="list-group-item"><strong>Material:</strong>  
+                                        <ui:repeat var="item" value="#{managedBeanMaterial.list}" >
+                                            <br />
+                                            Cantidad:   #{item.cantidad}   Nombre:   #{item.nombre}
+                                        </ui:repeat>
+                                    </li>
+                                    <li class="list-group-item"><strong>Equipo</strong>: 
+                                        <ui:repeat var="item" value="#{managedBeanEquipo.lista}" >
+                                            <br />
+                                            Cantidad:   #{item.cantidad}   Nombre:   #{item.nombre}
+                                        </ui:repeat>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="card" >
+                                <div class="card-header colortitulo text-white">
+                                    III Desarrollo de la práctica
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><strong>Desarrollo experimental:</strong><br/><h:outputText value="#{Practica.datosPractica.desarrollo}" escape="false" ></h:outputText> </li>
+                                    <li class="list-group-item"><strong>Registro de datos:</strong><br/><h:outputText value="#{Practica.datosPractica.registroDatos}" escape="false" ></h:outputText></li>
+                                    <li class="list-group-item"><strong>Resultados:</strong><br/><h:outputText value="#{Practica.datosPractica.resultados}" escape="false" ></h:outputText></li>
+                                    <li class="list-group-item"><strong>Análisis de resultados:</strong><br/><h:outputText value="#{Practica.datosPractica.analisisResultados}" escape="false" ></h:outputText></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="card" >
+                                <div class="card-header colortitulo text-white">
+                                    IV  Información adicional
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><strong>Referencias:</strong><br/><h:outputText value="#{Practica.datosPractica.referencias}" escape="false" ></h:outputText></li>
+                                    <li class="list-group-item"><strong>Nomenclatura:</strong><br/><h:outputText value="#{Practica.datosPractica.nomeclantura}" escape="false" ></h:outputText></li>
+                                    <li class="list-group-item"><strong>Anexos:</strong><br/><h:outputText value="#{Practica.datosPractica.anexos}" escape="false" ></h:outputText> </li>
+                                    <li class="list-group-item"><strong>Protocolos de actuación:</strong><h:outputText value="#{Practica.datosPractica.protocolos}" escape="false" ></h:outputText> </li>
+                                    <li class="list-group-item"><strong>Recomendaciones:</strong><br/><h:outputText value="#{managedBeanPractica.practica.recomendaciones}" escape="false" ></h:outputText> </li>
+                                    <li class="list-group-item"><strong>Semáforo:</strong><br/> <h:graphicImage value = "#{managedBeanPractica.practica.semaforo}"/> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Si vas a usar Jquery dejalo debajo de aqui si no borralo (Cuando usas primefaces) -->
+
+            </ui:define> 
+        </ui:composition>       
+    </h:body>
+</html>

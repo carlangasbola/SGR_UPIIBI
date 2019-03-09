@@ -1,0 +1,119 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <head>
+        <link rel="stylesheet" href="../misestilos/estiloC.css"/>
+    </head>
+    <h:body>
+
+        <!-- Aquí va el contenido solo van ROWS y COLS no colocar containers -->
+        <ui:composition template = "TemplatePrincipal.xhtml">	         
+            <ui:define name = "Contenido">
+                <!-- Breadcrumbs-->
+
+                <div class="row ">
+                    <div class="col">
+                        <hgroup class="mb-4">
+                            <h2 class="text-center">Creación de prácticas de laboratorio</h2>
+                            <br/><h5 class="text-center">Unidad Profesional Interdisciplinaria de Biotecnología</h5>
+                            <h6 class="text-center">Laboratorio de biotecnología</h6>
+                            <h6 class="text-center"> Requisitos </h6>
+                            <h5 class="text-center my-4">I Requisitos</h5>
+                        </hgroup>
+                    </div>
+                </div>
+
+                <form class=" border border-secondary rounded p-4"  method="POST" jsf:id="form"> 
+                    <div class="row">
+                        <div class="col-12 col-md">
+                            <div class="form-group ">
+                                <label for="tituloprac">> Título de la práctica</label>
+                                <input id="tituloprac" type="text" class="form-control form-control-sm " jsf:value="#{Practica.datosPractica.nombre}"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div class="row">                 
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="objetivo">> Objetivos</label>
+                                <textarea class="form-control" id="objetivo" rows="3" jsf:value="#{Practica.datosPractica.objetivos}"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">    
+                            <div class="form-group ">
+                                <label for="activitypre">> Actividades Previas</label>
+                                <!-- Valor de JSF ID NO -->
+                                <textarea class="form-control" id="activitypre" rows="3" jsf:value="#{Practica.datosPractica.actividadesPrevias}" ></textarea>
+                            </div>
+                        </div>    
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md">
+                            <label for="competencias">> Competencias</label>
+                            <textarea class="form-control" id="activitypre" rows="3" ></textarea>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 col-md">
+                            <div class="form-group ">
+                                <label for="introducción">> Introducción</label>
+                                <p:textEditor id="descriptionId" height="300" widgetVar="descriptionWidget" value="#{Practica.datosPractica.introducion}">
+                                    <f:facet name="toolbar">
+                                        <span class="ql-formats">
+                                            <select class="ql-font" />
+                                            <select class="ql-size" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold" />
+                                            <button class="ql-italic" />
+                                            <button class="ql-underline" />
+                                            <button class="ql-strike" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-color" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-script" value="sub" />
+                                            <button class="ql-script" value="super" />
+                                        </span>                            
+                                        <span class="ql-formats">
+                                            <button class="ql-list" value="ordered" />
+                                            <button class="ql-list" value="bullet" />
+                                            <button class="ql-indent" value="-1" />
+                                            <button class="ql-indent" value="+1" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-align" />
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-image" />>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-clean" />
+                                        </span>
+                                    </f:facet>
+                                </p:textEditor>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Botone siguiente -->
+                    <button type="submit" class="anteriorsiguiente btn-primary form-control mt-2 col-sm-2" jsf:action="#{Practica.ir_Practica2()}"  style="float:right"><i class="fas fa-chevron-circle-right mr-2"></i>Siguiente</button>
+                </form>
+
+                <!-- Si vas a usar Jquery dejalo debajo de aqui si no borralo (Cuando usas primefaces) -->
+
+            </ui:define> 
+        </ui:composition>       
+    </h:body>
+</html>
